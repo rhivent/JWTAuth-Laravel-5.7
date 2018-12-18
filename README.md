@@ -58,15 +58,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;<br/>
 use Tymon\JWTAuth\Contracts\JWTSubject;<br/>
 class User extends Authenticatable implements JWTSubject<br/>
 {<br/>
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
-}
+    public function getJWTIdentifier()<br/>
+    {<br/>
+        return $this->getKey();<br/>
+    }<br/>
+    public function getJWTCustomClaims()<br/>
+    {<br/>
+        return [];<br/>
+    }<br/>
+}<br/>
 </i></p><br/>
 Sebelum membuat JWT buat route dulu pada file route/api.php
 
@@ -79,8 +79,8 @@ key = Authorization
 value = Bearer {yourtokenhere}
 
 untuk membuat middleware pada laravel 5.* maka harus menaruh kode pada app/Http/Kernel.php pada bagian $routeMiddleware property :
-protected $routeMiddleware = [
-....
-	'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
-		'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
-	];
+<br/>protected $routeMiddleware = [
+....<br/>
+	'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,<br/>
+		'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,<br/>
+	];<br/>

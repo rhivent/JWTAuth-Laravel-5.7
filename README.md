@@ -44,21 +44,20 @@ dan juga pada auth.php pada array providers ubah bagian path model
 I found my problem.
 on config/jwt.php file change following provider :
 
-NamshiAdapter to Namshi
-IlluminateAuthAdapter to Illuminate
-IlluminateCacheAdapter to Illuminate
+<p><i>NamshiAdapter to Namshi<br/>
+IlluminateAuthAdapter to Illuminate<br/>
+IlluminateCacheAdapter to Illuminate<br/>
 
 Type error: Argument 1 passed to Tymon\JWTAuth\JWT::fromUser() must be an instance of Tymon\JWTAuth\Contracts\JWTSubject, 
-instance of App\User given, called in /Applications/XAMPP/xamppfiles/htdocs/git/jwt-test/vendor/tymon/jwt-auth/src/JWTAuth.php on line 54
-
+instance of App\User given, called in /Applications/XAMPP/xamppfiles/htdocs/git/jwt-test/vendor/tymon/jwt-auth/src/JWTAuth.php on line 54<br/>
 
 I fix it by implement JWTSubject and modify the class:
 
-namespace App;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
-class User extends Authenticatable implements JWTSubject
-{
+namespace App;<br/>
+use Illuminate\Foundation\Auth\User as Authenticatable;<br/>
+use Tymon\JWTAuth\Contracts\JWTSubject;<br/>
+class User extends Authenticatable implements JWTSubject<br/>
+{<br/>
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -68,12 +67,12 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 }
-
+</i></p><br/>
 Sebelum membuat JWT buat route dulu pada file route/api.php
 
 Route::post('/auth/signin','AuthController@signin');
 
-Setelah terbuat token maka untuk memakai token sebgai middleware yaitu melakukan authentication. 
+Setelah terbuat token maka untuk memakai token sebgai middleware yaitu melakukan authentication. <br/>
 Pada saat kita mengakses endpoint yang terproteksi, kita harus mengirim dibagian headernya yaitu:
 
 key = Authorization
